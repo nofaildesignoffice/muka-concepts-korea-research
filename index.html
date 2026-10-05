@@ -91,6 +91,20 @@
   .cols2{display:grid; grid-template-columns:1fr 1fr; gap:16px}
   @media(max-width:680px){.cols2{grid-template-columns:1fr}}
 
+  /* inline term hint */
+  .term{border-bottom:1px dotted var(--faint); cursor:help}
+  .hint{color:var(--muted); font-size:.92em; font-weight:500}
+
+  /* glossary */
+  .gloss{border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; margin:14px 0 30px}
+  .gloss .row{display:grid; grid-template-columns:210px 1fr; border-bottom:1px solid var(--line-soft)}
+  .gloss .row:last-child{border-bottom:none}
+  .gloss .t{padding:13px 16px; font-weight:700; color:var(--ink); background:var(--fill-2); font-size:14px; border-right:1px solid var(--line-soft)}
+  .gloss .t small{display:block; font-weight:600; color:var(--muted); font-size:12px; margin-top:2px}
+  .gloss .d{padding:13px 16px; font-size:14px; color:var(--body); line-height:1.7}
+  .gloss .d em{font-style:normal; color:var(--accent-deep); font-weight:600}
+  @media(max-width:600px){.gloss .row{grid-template-columns:1fr} .gloss .t{border-right:none; border-bottom:1px solid var(--line-soft)}}
+
   footer{background:#fff; padding:56px 24px; border-top:1px solid var(--line)}
   footer .wrap{color:var(--muted); font-size:13px}
   footer h3{font-size:16px; margin-bottom:14px}
@@ -120,6 +134,7 @@
       <a href="#customs">D. 통관·세금·규제<span>IK-CEPA·전안법·landed cost</span></a>
       <a href="#deal">E. 협상·전략·리스크<span>계약형태·상표·설득법</span></a>
       <a href="#unknown">확인불가 · 다음 액션<span>지어내지 않은 것</span></a>
+      <a href="#glossary">용어 사전<span>무역·유통·계약 전문용어</span></a>
     </nav>
   </div>
 </header>
@@ -145,7 +160,7 @@
         <li><strong>창업자는 Iris / Irina Van de Coevering</strong>(패션업계 + 마이애미 스파 출신, founder-led). 이름 표기와 국적에 소스 간 불일치가 있어 접촉 시 본인 확인이 필요하다(B 참조).</li>
         <li><strong>한국 유통은 공개검색에서 발견되지 않았다.</strong> 미개척 기회다. 단 "전혀 없음"의 확정은 아니므로 브랜드에 기존 거래·영역충돌을 서면 확인해야 한다.</li>
         <li><strong>원가·도매가·생산량은 전부 비공개.</strong> 벤치마크로만 추정했다. 이 숫자는 브랜드에 직접 받아야 하는, 이번 사업의 사활이 걸린 1순위 질의 항목이다.</li>
-        <li><strong>구조 권고.</strong> 독점료를 선불하지 말 것. <strong>2~4개 hero SKU로 3~6개월 유상 비독점 파일럿 → sell-through·납기·불량률 KPI 달성 시 12개월 조건부 독점</strong>이 가장 방어적이다.</li>
+        <li><strong>구조 권고.</strong> 독점료를 선불하지 말 것. <strong>2~4개 hero SKU<span class="hint">(가장 잘 팔릴 핵심 효자 품목)</span>로 3~6개월 유상 비독점 파일럿 → sell-through<span class="hint">(판매소진율)</span>·납기·불량률 KPI<span class="hint">(핵심성과지표)</span> 달성 시 12개월 조건부 독점</strong>이 가장 방어적이다. <span class="hint">용어는 하단 <a href="#glossary">용어 사전</a> 참고.</span></li>
         <li><strong>최대 리스크는 한국 상표 선점.</strong> 미국 상표는 <strong>화장품(class 3)만</strong> 등록돼 있어 의류(class 25)는 무방비다. KIPRIS 선점 조사가 접촉보다 먼저다.</li>
       </ul>
     </div>
@@ -477,6 +492,81 @@
       <li><strong>받은 자료로 2차 산정:</strong> 실제 FOB·MOQ·capacity로 landed cost·마진·손익분기 모델 확정</li>
       <li><strong>파일럿 설계:</strong> hero SKU 2~4개·KPI(sell-through·납기·불량률)·조건부 독점 트리거 문서화</li>
     </ol>
+  </div>
+</section>
+
+<!-- GLOSSARY -->
+<section id="glossary">
+  <div class="wrap">
+    <div class="eyebrow">Glossary</div>
+    <h2 class="sect">용어 사전</h2>
+    <p class="sect-sub">리포트에 나온 무역·유통·계약 전문용어를 쉬운 말로 정리했다. 약어는 원어를 함께 적었다.</p>
+
+    <h3 class="block">가격 · 유통</h3>
+    <div class="gloss">
+      <div class="row"><div class="t">SKU<small>Stock Keeping Unit</small></div><div class="d">재고를 세는 최소 단위. 같은 디자인이라도 색·사이즈가 다르면 다른 SKU다. <em>예: 검정 S · 검정 M = 2 SKU.</em></div></div>
+      <div class="row"><div class="t">hero SKU<small>히어로 SKU</small></div><div class="d">라인업에서 가장 잘 팔리고 브랜드를 대표하는 핵심 효자 상품. 파일럿에선 전 품목이 아니라 이 소수 품목만 먼저 들여와 반응을 검증한다.</div></div>
+      <div class="row"><div class="t">MSRP<small>권장소비자가</small></div><div class="d">브랜드가 제시하는 소비자 판매가(Manufacturer's Suggested Retail Price). 한국 판매가 설계의 기준점.</div></div>
+      <div class="row"><div class="t">도매가<small>wholesale price</small></div><div class="d">브랜드가 유통사·소매상에 넘기는 가격. 소비자가보다 낮고, 이 차이가 유통사의 마진 원천이다.</div></div>
+      <div class="row"><div class="t">keystone<small>키스톤 가격</small></div><div class="d">소매가 = 도매원가 × 2, 즉 도매가가 소매가의 50%인 패션 업계의 기본 가격 규칙. <em>협상 출발점으로만 쓰고, 통관·물류·마케팅비는 여기 안 들어가 있음에 유의.</em></div></div>
+      <div class="row"><div class="t">DTC<small>Direct to Consumer</small></div><div class="d">브랜드가 중간유통 없이 소비자에게 직접 파는 방식(자사몰 등). 유통사를 거치는 것보다 마진이 높다.</div></div>
+      <div class="row"><div class="t">gross margin / gross points<small>매출총이익(률)</small></div><div class="d">매출에서 원가를 뺀 이익의 비율. "points"는 그 비율의 %포인트를 말한다. <em>예: 20~30 gross points = 약 20~30% 마진 확보.</em></div></div>
+      <div class="row"><div class="t">volume rebate<small>물량 리베이트</small></div><div class="d">일정 수량 이상 사면 사후에 일부 금액을 돌려주는 할인. 많이 팔수록 단가가 내려가는 효과.</div></div>
+      <div class="row"><div class="t">line sheet<small>라인시트</small></div><div class="d">도매 거래용 상품 목록표. 품번·사진·도매가·MOQ·소재 등이 정리돼 있다. 협상 시 브랜드에 꼭 요청할 자료.</div></div>
+      <div class="row"><div class="t">sell-through<small>판매소진율</small></div><div class="d">들여온 재고 중 실제로 팔린 비율. 파일럿 성공을 판가름하는 핵심 지표. <em>예: 100장 들여와 70장 팔면 sell-through 70%.</em></div></div>
+      <div class="row"><div class="t">price parity<small>가격 동일성</small></div><div class="d">여러 판매 채널(자사몰·오프라인·마켓) 간 가격을 일정하게 맞추는 조건. 채널끼리 가격 깎기 경쟁을 막는다.</div></div>
+    </div>
+
+    <h3 class="block">생산 · 품질</h3>
+    <div class="gloss">
+      <div class="row"><div class="t">MOQ<small>최소주문수량</small></div><div class="d">한 번에 주문해야 하는 최소 물량(Minimum Order Quantity). "스타일당·컬러당 MOQ"와 "총 주문금액 MOQ"는 별개이므로 둘 다 확인해야 한다.</div></div>
+      <div class="row"><div class="t">made-to-order<small>주문생산</small></div><div class="d">재고를 쌓아두지 않고 주문이 들어오면 만드는 방식. 재고 리스크는 적지만 납기가 길다.</div></div>
+      <div class="row"><div class="t">lead time<small>리드타임</small></div><div class="d">발주부터 실제 입고까지 걸리는 시간. 수제·소량 브랜드는 길 수 있어 시즌 기획의 핵심 변수.</div></div>
+      <div class="row"><div class="t">capacity<small>생산능력</small></div><div class="d">공장이 만들 수 있는 월 최대 생산량. 리오더(재주문) 가능 여부를 좌우한다.</div></div>
+      <div class="row"><div class="t">fill rate<small>납품충족률</small></div><div class="d">주문한 수량 대비 실제로 받은 수량의 비율. 낮으면 품절·판매기회 손실로 이어진다.</div></div>
+      <div class="row"><div class="t">AQL<small>Acceptance Quality Limit</small></div><div class="d">합격품질한계. 전수검사 대신 표본을 뽑아 불량을 어디까지 허용할지 정하는 국제 검품 기준.</div></div>
+      <div class="row"><div class="t">colorfastness / shrinkage<small>색상견뢰도 / 수축률</small></div><div class="d">세탁·마찰 시 물빠짐 정도(견뢰도)와 줄어드는 정도(수축률). 품질 클레임을 막기 위한 필수 시험 항목.</div></div>
+    </div>
+
+    <h3 class="block">무역 · 통관</h3>
+    <div class="gloss">
+      <div class="row"><div class="t">HS 코드<small>품목분류번호</small></div><div class="d">상품을 분류하는 국제 공통 코드. 이 코드로 관세율과 FTA 적용 여부가 결정된다. 같은 "옷"도 소재·용도·성별에 따라 코드가 갈린다.</div></div>
+      <div class="row"><div class="t">MFN 관세<small>최혜국세율 · 기본관세</small></div><div class="d">FTA 혜택 없이 적용되는 일반 관세율(의류는 통상 13%). FTA 원산지증명이 있으면 이보다 낮아진다.</div></div>
+      <div class="row"><div class="t">C/O<small>원산지증명서</small></div><div class="d">상품이 어느 나라에서 만들어졌는지 증명하는 서류(Certificate of Origin). <em>FTA 특혜관세(0% 등)를 받으려면 반드시 필요.</em></div></div>
+      <div class="row"><div class="t">IK-CEPA / 한-아세안 FTA / RCEP<small>자유무역협정</small></div><div class="d">한국과 인도네시아에 적용되는 FTA들. IK-CEPA(한-인니 양자협정, 2023 발효)가 섬유·의류 원산지 기준이 가장 유리한 편. 셋은 중복 적용 불가라 품목별로 가장 유리한 하나를 고른다.</div></div>
+      <div class="row"><div class="t">Incoterms<small>EXW · FOB · CIF · FCA</small></div><div class="d">무역 거래조건. 상품값에 운임·보험·책임을 "어디까지 판매자가 지는지"를 정한다.<br><em>EXW(공장인도)</em> 공장에서 받고 이후 전부 구매자 부담 · <em>FOB(본선인도)</em> 수출항 배에 싣기까지 판매자 부담 · <em>CIF(운임·보험포함)</em> 도착항까지 운임+보험 판매자 부담 · <em>FCA(운송인인도)</em> 지정장소에서 운송인에게 인도.</div></div>
+      <div class="row"><div class="t">CIF 과세가격<small>관세 계산 기준값</small></div><div class="d">상품값 + 국제운임 + 보험료의 합. 한국 관세·부가세는 이 값을 기준으로 매긴다.</div></div>
+      <div class="row"><div class="t">landed cost<small>총 입고원가</small></div><div class="d">상품값 + 운임 + 보험 + 관세 + 부가세 + 통관·검사·라벨까지 전부 더한 "한국 창고에 도착했을 때의 실제 원가". 마진 계산의 진짜 출발점.</div></div>
+      <div class="row"><div class="t">LCL / FCL<small>소량 / 전량 컨테이너</small></div><div class="d">LCL은 컨테이너 한 개를 못 채우는 소량화물(여러 화주가 나눠 실음), FCL은 컨테이너를 통째로 쓰는 것. 초기 소량 수입은 보통 LCL.</div></div>
+      <div class="row"><div class="t">THC · CFS · B/L · AWB<small>물류·운송 서류</small></div><div class="d">THC=항만 작업료 · CFS=소량화물(LCL) 창고·작업장 · B/L=선하증권(해상 운송·화물인수 증서) · AWB=항공운송장(항공 화물 운송증).</div></div>
+      <div class="row"><div class="t">T/T / L/C<small>무역 결제방식</small></div><div class="d"><em>T/T</em>는 계좌 송금(간편하나 선금은 구매자가 미배송 위험을 짐). <em>L/C(신용장)</em>는 은행이 조건 충족 시 지급을 보증(안전하나 수수료·절차 부담). 초기 소액은 보통 "일부 선금 + 선적 후 잔금".</div></div>
+    </div>
+
+    <h3 class="block">계약 · 협상</h3>
+    <div class="gloss">
+      <div class="row"><div class="t">독점 distributor<small>독점 수입총판</small></div><div class="d">특정 지역(한국)에서 그 브랜드를 독점으로 수입·유통할 권리를 가진 사업자. 투자 회수·가격 통제가 쉬운 대신 최소구매·마케팅 의무가 따른다.</div></div>
+      <div class="row"><div class="t">비독점<small>non-exclusive</small></div><div class="d">브랜드가 같은 지역에 다른 수입사도 둘 수 있는 상태. 첫 주문이 작고 빠르지만 가격 경쟁 위험이 있다.</div></div>
+      <div class="row"><div class="t">consignment<small>위탁판매</small></div><div class="d">재고 소유권은 브랜드에 둔 채 매장에 깔고, 팔린 만큼만 정산하는 방식. 초기 재고 부담이 낮다.</div></div>
+      <div class="row"><div class="t">병행수입<small>parallel import</small></div><div class="d">공식 총판이 아닌 제3자가 다른 경로로 정품을 들여와 파는 것. 한국에 상표권이 없으면 이를 막기 어렵다.</div></div>
+      <div class="row"><div class="t">라이선스<small>license</small></div><div class="d">상표·디자인 사용권을 받아 현지에서 생산·판매하는 구조. 장기적으로 운임·납기를 줄이나 품질·IP 관리가 복잡.</div></div>
+      <div class="row"><div class="t">cure period<small>치유기간</small></div><div class="d">계약 위반이 생겨도 즉시 해지하지 않고, 정해진 기간 안에 바로잡을 기회를 주는 조항.</div></div>
+      <div class="row"><div class="t">sell-off period<small>재고소진 유예</small></div><div class="d">계약이 끝난 뒤에도 남은 재고를 일정 기간(예: 3~6개월) 팔 수 있게 허용하는 조항.</div></div>
+      <div class="row"><div class="t">buyback<small>재고 환매</small></div><div class="d">계약 종료 시 브랜드가 유통사의 남은 재고를 되사주는 것. 유통사의 재고 리스크를 줄인다.</div></div>
+      <div class="row"><div class="t">change of control<small>경영권 변동</small></div><div class="d">회사의 실소유·지배권이 바뀌는 것(매각·합병 등). 계약 해지 사유로 자주 넣는다.</div></div>
+      <div class="row"><div class="t">beneficial owner<small>실소유자</small></div><div class="d">서류상 명의와 별개로 실제로 회사를 소유·지배하는 사람. 계약 상대가 진짜 결정권자인지 확인하는 항목.</div></div>
+      <div class="row"><div class="t">co-op 마케팅<small>마케팅비 분담</small></div><div class="d">브랜드와 유통사가 광고·프로모션 비용을 함께 부담하는 것(cooperative marketing).</div></div>
+      <div class="row"><div class="t">KPI<small>핵심성과지표</small></div><div class="d">성과를 재는 핵심 수치. 이 파일럿에선 sell-through(판매소진율)·납기 준수·불량률 등을 독점 전환의 조건으로 건다.</div></div>
+      <div class="row"><div class="t">PO<small>Purchase Order · 발주서</small></div><div class="d">구매자가 브랜드에 보내는 공식 주문서. opening PO는 "첫 발주"를 말한다.</div></div>
+    </div>
+
+    <h3 class="block">규제 · 기타</h3>
+    <div class="gloss">
+      <div class="row"><div class="t">전안법<small>전기용품 및 생활용품 안전관리법</small></div><div class="d">국내에서 파는 생활용품(의류 포함)의 안전을 관리하는 법. 수입 의류도 이 틀 안에서 안전·표시 의무를 진다.</div></div>
+      <div class="row"><div class="t">공급자적합성확인<small>SDoC</small></div><div class="d">수입·제조자가 스스로 제품이 안전기준에 맞음을 확인·표시하는 제도. 성인 의류가 여기 해당(의무 시험·KC마크는 없지만 한글 품질표시는 필수).</div></div>
+      <div class="row"><div class="t">KC 마크<small>국가통합인증마크</small></div><div class="d">한국 안전인증 마크. 성인 의류(안전기준준수대상)는 부착 의무가 없지만, 아동용 등 더 엄격한 품목엔 요구된다.</div></div>
+      <div class="row"><div class="t">PT / LLC<small>법인 형태</small></div><div class="d">PT는 인도네시아 주식회사(Perseroan Terbatas), LLC는 미국 유한책임회사. Muka는 두 법인이 모두 존재한다.</div></div>
+      <div class="row"><div class="t">jamu<small>자무</small></div><div class="d">인도네시아 전통 약초 요법. Muka 스킨케어가 내세우는 제조 철학의 뿌리.</div></div>
+    </div>
   </div>
 </section>
 
