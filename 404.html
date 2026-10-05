@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muka Concepts 한국 수입·독점유통 사전조사 | NoFail Design</title>
+<meta name="description" content="발리 concept store Muka Concepts(@muka_concepts) 의류의 한국 수입·독점 유통 사전조사. 브랜드·창업자·유통·원가·통관(IK-CEPA)·전안법·협상구조·리스크. codex×Claude 2레인 교차검증, 공개 1차소스 기반.">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root{
+    --ink:#111827; --body:#374151; --muted:#6b7280; --faint:#9ca3af;
+    --line:#e5e7eb; --line-soft:#f1f3f5; --fill:#f8fafc; --fill-2:#f3f4f6;
+    --accent:#0d9488; --accent-deep:#0f5e58; --accent-soft:#e6f4f2;
+    --ok:#15803d; --ok-bg:#eafaf0; --warn:#b45309; --warn-bg:#fdf3e6; --low:#6b7280; --low-bg:#f1f3f5;
+    --radius:16px; --radius-sm:10px; --maxw:920px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Pretendard',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+    color:var(--body); background:#fff; line-height:1.75; letter-spacing:-.01em;
+    word-break:keep-all; -webkit-font-smoothing:antialiased;
+  }
+  section{background:#fff; padding:64px 24px; border-bottom:1px solid var(--line-soft)}
+  .wrap{max-width:var(--maxw); margin:0 auto}
+  h1,h2,h3,h4{color:var(--ink); line-height:1.3; letter-spacing:-.02em; font-weight:800}
+  p{margin:0 0 14px}
+  a{color:var(--accent-deep); text-decoration:none; border-bottom:1px solid rgba(13,148,136,.3)}
+  a:hover{border-bottom-color:var(--accent)}
+  strong{font-weight:700; color:var(--ink)}
+  sup{font-size:.68em; color:var(--accent-deep); font-weight:700; margin-left:1px}
+
+  .hero{background:#fff; padding:72px 24px 56px; border-bottom:1px solid var(--line)}
+  .hero .kicker{display:inline-block; font-size:13px; font-weight:700; letter-spacing:.04em;
+    color:var(--accent-deep); background:var(--accent-soft); padding:6px 14px; border-radius:999px; margin-bottom:22px}
+  .hero h1{font-size:clamp(28px,5vw,44px); font-weight:800; margin-bottom:18px}
+  .hero .lead{font-size:clamp(16px,2.2vw,19px); color:var(--body); max-width:730px; margin-bottom:26px}
+  .meta-row{display:flex; flex-wrap:wrap; gap:10px; font-size:13px}
+  .meta-row span{border:1px solid var(--line); border-radius:999px; padding:6px 14px; color:var(--muted); background:#fff}
+
+  .toc{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; margin-top:34px}
+  .toc a{display:block; border:1px solid var(--line); border-radius:var(--radius-sm); padding:16px 18px; color:var(--ink);
+    font-weight:600; font-size:15px; background:#fff; transition:.15s}
+  .toc a:hover{border-color:var(--accent); background:var(--accent-soft)}
+  .toc a span{display:block; font-size:12px; color:var(--muted); font-weight:500; margin-top:3px}
+
+  .eyebrow{font-size:13px; font-weight:700; letter-spacing:.06em; color:var(--accent); margin-bottom:10px; text-transform:uppercase}
+  h2.sect{font-size:clamp(24px,3.4vw,32px); margin-bottom:10px}
+  .sect-sub{font-size:16px; color:var(--muted); margin-bottom:34px; max-width:760px}
+  h3.block{font-size:20px; margin:40px 0 14px; padding-top:4px}
+  h4{font-size:16px; margin:24px 0 10px; font-weight:700}
+
+  .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:14px; margin:26px 0}
+  .stat{border:1px solid var(--line); border-radius:var(--radius); padding:22px 20px; background:#fff}
+  .stat .n{font-size:28px; font-weight:800; color:var(--ink); line-height:1.1}
+  .stat .n small{font-size:14px; font-weight:700; color:var(--accent-deep)}
+  .stat .l{font-size:13px; color:var(--muted); margin-top:8px; line-height:1.5}
+
+  .card{border:1px solid var(--line); border-radius:var(--radius); padding:24px; background:#fff; margin:18px 0}
+  .card.fill{background:var(--fill)}
+  .note{border:1px solid var(--line); border-radius:var(--radius-sm); padding:16px 18px; background:var(--fill); font-size:14px; color:var(--body); margin:16px 0}
+  .note b{color:var(--ink)}
+  .warnbox{border:1px solid #f0d9b5; border-radius:var(--radius-sm); padding:16px 18px; background:var(--warn-bg); font-size:14px; margin:16px 0}
+  .warnbox b{color:var(--warn)}
+  .okbox{border:1px solid #bfe6cc; border-radius:var(--radius-sm); padding:16px 18px; background:var(--ok-bg); font-size:14px; margin:16px 0}
+  .okbox b{color:var(--ok)}
+
+  ul.clean{list-style:none; margin:12px 0}
+  ul.clean li{position:relative; padding-left:20px; margin-bottom:9px; font-size:15px}
+  ul.clean li::before{content:"·"; position:absolute; left:4px; top:-1px; color:var(--accent); font-weight:800; font-size:18px}
+  ol.steps{counter-reset:s; list-style:none; margin:14px 0}
+  ol.steps li{position:relative; padding-left:38px; margin-bottom:12px; font-size:15px}
+  ol.steps li::before{counter-increment:s; content:counter(s); position:absolute; left:0; top:1px;
+    width:24px; height:24px; border-radius:50%; background:var(--accent-soft); color:var(--accent-deep);
+    font-weight:800; font-size:13px; display:flex; align-items:center; justify-content:center}
+
+  .tw{overflow-x:auto; margin:18px 0; border:1px solid var(--line); border-radius:var(--radius)}
+  table{border-collapse:collapse; width:100%; font-size:14px; min-width:560px}
+  th,td{padding:12px 14px; text-align:left; border-bottom:1px solid var(--line-soft); vertical-align:top}
+  thead th{background:var(--fill-2); color:var(--ink); font-weight:700; font-size:13px; white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  td.num,th.num{text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums}
+  tbody tr:hover{background:var(--fill)}
+  caption{caption-side:bottom; font-size:12px; color:var(--faint); padding:10px 14px; text-align:left}
+
+  .badge{display:inline-block; font-size:12px; font-weight:700; padding:3px 10px; border-radius:999px; vertical-align:middle}
+  .b-ok{background:var(--ok-bg); color:var(--ok)}
+  .b-warn{background:var(--warn-bg); color:var(--warn)}
+  .b-low{background:var(--low-bg); color:var(--low)}
+
+  .cols2{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  @media(max-width:680px){.cols2{grid-template-columns:1fr}}
+
+  footer{background:#fff; padding:56px 24px; border-top:1px solid var(--line)}
+  footer .wrap{color:var(--muted); font-size:13px}
+  footer h3{font-size:16px; margin-bottom:14px}
+  footer ol{margin:0 0 0 18px}
+  footer li{margin-bottom:7px; font-size:12.5px; word-break:break-all; line-height:1.6}
+  .disc{font-size:12px; color:var(--faint); margin-top:24px; line-height:1.7}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker">사전조사 · codex × Claude 2레인 교차검증</span>
+    <h1>Muka Concepts 의류 한국 수입·독점유통 사전조사</h1>
+    <p class="lead">발리 concept store <strong>Muka Concepts</strong>(@muka_concepts)의 의류를 한국에 수입·유통하기 위한 브랜드·창업자·유통·원가·통관·협상 조사. 두 개의 독립 리서치 레인(codex 웹검색 + Claude 웹검색)으로 교차검증했고, 확인 못 한 사실은 지어내지 않고 <strong>확인불가</strong>로 표시했다.</p>
+    <div class="meta-row">
+      <span>조사기준일 2026-10-05</span>
+      <span>공개 1차소스 기반</span>
+      <span>법률·세무 자문 아님</span>
+      <span>결정은 의뢰인이</span>
+    </div>
+    <nav class="toc">
+      <a href="#summary">핵심 요약<span>한 장 결론 · 2레인 매트릭스</span></a>
+      <a href="#brand">A. 브랜드 정체성<span>제품·소재·법인·거점</span></a>
+      <a href="#founder">B. 창업자 · CEO<span>Iris/Irina · 불일치 플래그</span></a>
+      <a href="#dist">C. 유통·가격·원가<span>리테일가·도매·생산량</span></a>
+      <a href="#customs">D. 통관·세금·규제<span>IK-CEPA·전안법·landed cost</span></a>
+      <a href="#deal">E. 협상·전략·리스크<span>계약형태·상표·설득법</span></a>
+      <a href="#unknown">확인불가 · 다음 액션<span>지어내지 않은 것</span></a>
+    </nav>
+  </div>
+</header>
+
+<!-- SUMMARY -->
+<section id="summary">
+  <div class="wrap">
+    <div class="eyebrow">Executive Summary</div>
+    <h2 class="sect">한 장 결론</h2>
+    <p class="sect-sub">두 레인이 대부분 합치해 할루시네이션 위험은 낮다. 핵심 숫자(도매가·생산량·HS별 세율·상표 현황)는 공개자료에 없어 브랜드 실사·관세사 확인이 필요한 영역으로 분리했다.</p>
+
+    <div class="stats">
+      <div class="stat"><div class="n">4<small>개 거점</small></div><div class="l">발리 오프라인 매장(Pererenan·Berawa·Green School·Ubud)</div></div>
+      <div class="stat"><div class="n">$50~235</div><div class="l">의류 리테일 가격대(USD, 자사몰 표시가)</div></div>
+      <div class="stat"><div class="n">2020</div><div class="l">법인화 연도(미국 LLC·인니 PT 교차 확인)</div></div>
+      <div class="stat"><div class="n">13% → 0%</div><div class="l">의류 관세: IK-CEPA/FTA 원산지증명 시 상당수 철폐 가능</div></div>
+    </div>
+
+    <div class="card fill">
+      <ul class="clean">
+        <li><strong>실재성 높음(양 레인 합치).</strong> 인도네시아 법인 <strong>PT Muka Concepts Alam Rempah</strong>(식약청 BPOM 2025 수입업자 목록), 미국 <strong>Muka Concepts, LLC</strong>(Florida, 2020 설립), 발리 오프라인 4개 거점, 활성 Shopify 자사몰이 교차 확인된다. 유령·사기 브랜드가 아니다.</li>
+        <li><strong>무엇을 파나.</strong> "concept store"로 <strong>스킨케어가 심장</strong>(수제 jamu 기반, USD 26~29) + <strong>프리미엄 리조트웨어 의류</strong>(USD 50~235) + 스파/페이셜을 묶는다. 발리 자연·장인정신·지속가능 서사.</li>
+        <li><strong>창업자는 Iris / Irina Van de Coevering</strong>(패션업계 + 마이애미 스파 출신, founder-led). 이름 표기와 국적에 소스 간 불일치가 있어 접촉 시 본인 확인이 필요하다(B 참조).</li>
+        <li><strong>한국 유통은 공개검색에서 발견되지 않았다.</strong> 미개척 기회다. 단 "전혀 없음"의 확정은 아니므로 브랜드에 기존 거래·영역충돌을 서면 확인해야 한다.</li>
+        <li><strong>원가·도매가·생산량은 전부 비공개.</strong> 벤치마크로만 추정했다. 이 숫자는 브랜드에 직접 받아야 하는, 이번 사업의 사활이 걸린 1순위 질의 항목이다.</li>
+        <li><strong>구조 권고.</strong> 독점료를 선불하지 말 것. <strong>2~4개 hero SKU로 3~6개월 유상 비독점 파일럿 → sell-through·납기·불량률 KPI 달성 시 12개월 조건부 독점</strong>이 가장 방어적이다.</li>
+        <li><strong>최대 리스크는 한국 상표 선점.</strong> 미국 상표는 <strong>화장품(class 3)만</strong> 등록돼 있어 의류(class 25)는 무방비다. KIPRIS 선점 조사가 접촉보다 먼저다.</li>
+      </ul>
+    </div>
+
+    <h3 class="block">2레인 교차검증 매트릭스</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th>항목</th><th>codex 레인</th><th>Claude 레인</th><th>판정</th></tr></thead>
+        <tbody>
+          <tr><td>브랜드 실재·정체성</td><td>확인</td><td>확인</td><td><span class="badge b-ok">합치 높음</span></td></tr>
+          <tr><td>발리 오프라인 4거점</td><td>확인</td><td>확인</td><td><span class="badge b-ok">합치 높음</span></td></tr>
+          <tr><td>리테일가 USD 50~235</td><td>품목별 상세</td><td>확인</td><td><span class="badge b-ok">합치 높음</span></td></tr>
+          <tr><td>창업자 성·경력(패션+마이애미 스파)</td><td>Irina / "Iris"</td><td>Iris</td><td><span class="badge b-ok">합치</span></td></tr>
+          <tr><td>창업자 국적</td><td>알바니아·러시아</td><td>아르메니아</td><td><span class="badge b-warn">불일치 미해결</span></td></tr>
+          <tr><td>법인·상표(미국 class 3)</td><td>정부·USPTO 자료</td><td>부분(LLC 흔적)</td><td><span class="badge b-ok">codex 우위</span></td></tr>
+          <tr><td>한국 공식 유통 부재</td><td>미발견</td><td>미발견</td><td><span class="badge b-warn">미발견(확정 아님)</span></td></tr>
+          <tr><td>FTA·전안법·landed cost 제도</td><td>상세</td><td>확인</td><td><span class="badge b-ok">합치 높음</span></td></tr>
+          <tr><td>도매율·MOQ·생산능력</td><td>확인불가</td><td>확인불가</td><td><span class="badge b-low">미공개 → 직접 질의</span></td></tr>
+          <tr><td>협상구조(파일럿→조건부독점)</td><td>권고</td><td>권고</td><td><span class="badge b-ok">합치 높음</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- A. BRAND -->
+<section id="brand">
+  <div class="wrap">
+    <div class="eyebrow">A</div>
+    <h2 class="sect">브랜드 정체성</h2>
+    <p class="sect-sub">신뢰도: 위치·상품·법인 <span class="badge b-ok">높음</span> · 설립스토리·전품목 수공예·매출 <span class="badge b-low">낮음</span></p>
+
+    <h3 class="block">무엇을 파는 브랜드인가</h3>
+    <p>IG 자기소개는 "Concept Store &gt;&gt; SkinFood &gt;&gt; Clothing". 발리 자연·종교·전통과의 조화, 로컬 문화 수용, 지속가능 원칙을 전면에 둔 "aesthetic / beauty / organic / fashion" 복합 콘셉트다. 실루엣은 느슨한 tropical·resort·yoga wear 성격이 강하다.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>제품군</th><th>내용</th><th>가격대</th></tr></thead>
+        <tbody>
+          <tr><td><strong>스킨케어(심장)</strong></td><td>macadamia scrub, flower cream butter, turmeric mask, seaweed serum 등 수제·천연·비건. 전통 Jamu의 현대 해석, 냉압착·stone pounder 제조 명시</td><td>USD 26~29</td></tr>
+          <tr><td><strong>의류</strong></td><td>여성·남성 리조트웨어(티셔츠·셔츠·팬츠·드레스·기모노·스커트). 본 사업의 대상</td><td>USD 50~235</td></tr>
+          <tr><td>홈·액세서리</td><td>가방·모자·안경·향·구리 괄사 등(2021년 매체 기준)</td><td>다양</td></tr>
+          <tr><td>서비스</td><td>얼굴·전신 마사지, 스크럽, 사우나·plunge pool(Green School점)</td><td>현장</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="warnbox"><b>소재 뉘앙스(중요).</b> 공식 표현은 "locally produced Indonesian natural textiles"지만, 실제 상품명에는 cotton·Supima·modal·silk modal·silk chiffon·viscose satin·lyocell/Tencel·wool·velvet·brocade가 보인다. modal·viscose·lyocell은 재생셀룰로스라 <b>전부 천연섬유는 아니다</b>(혼용률 확인 필요). "natural textiles"와 "natural dye(천연염색)"를 혼동하면 안 된다. 전품목 수공예·천연염색 여부는 <b>확인불가</b>(제3자 리뷰만 "handmade" 언급).</div>
+
+    <h3 class="block">설립·법인·위치</h3>
+    <ul class="clean">
+      <li><strong>인도네시아 법인:</strong> PT Muka Concepts Alam Rempah. 식약청(BPOM) 2025 수입업자/BUPN 목록에 주소 Jl. Raya Pantai Pererenan No.140, Mengwi, Badung으로 등재.</li>
+      <li><strong>미국 법인:</strong> Muka Concepts, LLC(Florida, doc L20000184121, filing 2020-06-30). 주소 428 NE 195 St, Miami, FL 33179. 공식몰 business address와 동일.</li>
+      <li><strong>법인화 연도 2020</strong>은 교차 확인(인니 SK …TAHUN 2020, 미국 LLC 2020-06-30, 미국 상표 출원 2020-11). 단일 공식 브랜드 연혁은 확인불가.</li>
+    </ul>
+
+    <h4>발리 오프라인 4거점(2026, 공식 Contact 기준)</h4>
+    <div class="tw">
+      <table>
+        <thead><tr><th>거점</th><th>주소</th><th>성격</th></tr></thead>
+        <tbody>
+          <tr><td>Pererenan 플래그십</td><td>Jl. Pantai Pererenan No.140-130, Mengwi, Badung 80351</td><td>본점(매일 9~18시)</td></tr>
+          <tr><td>Berawa</td><td>Jl. Pantai Berawa, Tibubeneng, Kuta Utara, Badung 80361</td><td>샵</td></tr>
+          <tr><td>Green School</td><td>Jl. Green School, Sibang Kaja, Abiansemal 80352</td><td>스파 &amp; 샵(사우나·plunge pool)</td></tr>
+          <tr><td>Muka × Bambu Indah</td><td>Jl. Baung, Sayan, Ubud, Gianyar 80571</td><td>협업 샵</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="block">규모 단서</h3>
+    <ul class="clean">
+      <li>제3자 커머스 인덱스(xpay, 2026): 105 products / 2,258 SKUs / median USD 95. Shopify 변형 SKU 포함, 매출 자료는 아님.</li>
+      <li>LinkedIn 컨설턴트 이력(2026): "3 regional branches, 30+ staff 급여 통합" → <strong>30명+ 운영 정황</strong>(공시가 아니라 자기기술).</li>
+      <li>IG 팔로워·연매출은 <span class="badge b-low">확인불가</span>(비로그인 미반환. 미국 LLC만 보는 민간신용 "매출 &lt;USD 500k·직원 1~5"는 발리 운영 전체와 불일치하는 저신뢰값).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- B. FOUNDER -->
+<section id="founder">
+  <div class="wrap">
+    <div class="eyebrow">B</div>
+    <h2 class="sect">창업자 &amp; 현 CEO</h2>
+    <p class="sect-sub">신뢰도: <span class="badge b-warn">중간</span> · 핵심 식별은 되나 이름·국적에 소스 충돌</p>
+
+    <h3 class="block">창업자 = Iris / Irina Van de Coevering</h3>
+    <ul class="clean">
+      <li>SpaChina <strong>2021</strong> 현장기사: MUKA를 "Iris의 brain-child"로 소개. <strong>마이애미 스파 소유·근무 + Harper's Bazaar·패션업계 경력자</strong>. 의류 사업의 뿌리가 여기다.</li>
+      <li>Florida LLC manager 기재: <strong>Irina Van De Coevering</strong>(2025 annual report).</li>
+      <li>Claude 레인(The Yak·Her World): "Iris van de Coevering, 15년 전 발리 정착, 패션 → 마이애미 스파 → 발리 herbal lab 창설."</li>
+    </ul>
+
+    <div class="warnbox"><b>미해결 불일치 2건(지어내지 않고 그대로 드러냄).</b><br>
+      ① <b>이름</b>: 언론 "Iris" vs 법인등기 "Irina". 동일인일 개연이 높으나 1차자료에서 둘을 직접 연결한 문장은 발견하지 못함 → 동일인 <b>추정</b>, 확정불가.<br>
+      ② <b>국적</b>: The Yak "아르메니아 태생" vs SpaChina "알바니아·러시아" → <b>상충·미해결</b>. 접촉 시 본인 확인 권장.</div>
+
+    <p>현 CEO 직함·공동창업자·지분구조는 <span class="badge b-low">확인불가</span>(인도네시아 유료 법인등기 없이는 director·commissioner·shareholder 불명). 정황상 founder-led로 보인다.</p>
+
+    <h3 class="block">브랜드가 추구하는 방향(공개 발언)</h3>
+    <ul class="clean">
+      <li>발리 자연·전통 영감, 로컬 문화 수용, <strong>sustainable principles</strong> 안에서 창작. 스킨케어는 사랑·건강·아름다움·artisan·Jamu 전통 복원.</li>
+      <li>GOTS·OEKO-TEX·Fair Trade·B Corp 등 제3자 지속가능 인증은 확인불가.</li>
+      <li><strong>해외 진출·도매·B2B 공개 발언 없음.</strong> 전용 wholesale 페이지·line sheet도 없음 → 한국 제안은 브랜드에 새로운 논의가 된다.</li>
+    </ul>
+
+    <div class="note"><b>협상 함의.</b> 창업자는 "패션 출신 + 약초 장인"의 하이브리드다. 브랜드의 심장은 스킨케어·발리 스토리·지속가능성이다. 한국 측이 "물량 깎는 바이어"가 아니라 <b>"브랜드 세계관을 한국에 정확히 옮길 파트너"</b>로 포지셔닝해야 저단가 독점의 문이 열린다.</div>
+
+    <h4>실재 연락 채널</h4>
+    <ul class="clean">
+      <li>이메일 mukaconcepts@gmail.com(실재 표기, 응답성 미확인)</li>
+      <li>WhatsApp 3회선(Pererenan·Berawa +62 877 6178 0950 외), IG @muka_concepts DM</li>
+      <li>전용 도매 라인 없음 → 메일 제목 "Korea distribution / wholesale inquiry"로 콜드 아웃리치</li>
+    </ul>
+  </div>
+</section>
+
+<!-- C. DISTRIBUTION -->
+<section id="dist">
+  <div class="wrap">
+    <div class="eyebrow">C</div>
+    <h2 class="sect">유통 · 판매가 · 원가</h2>
+    <p class="sect-sub">신뢰도: 리테일가 <span class="badge b-ok">높음</span> · 도매·원가·생산능력 <span class="badge b-low">추정(미공개)</span></p>
+
+    <h3 class="block">현재 유통 채널</h3>
+    <ul class="clean">
+      <li>자사몰 Shopify(mukaconcepts.com, USD 결제) + 발리 오프라인 4거점.</li>
+      <li>외부 리테일은 Samadi 슈퍼마켓에 향(IDR 75,000) 위탁 흔적뿐. 의류 stockist 근거 없음.</li>
+      <li><strong>한국 유통 공개검색 미발견</strong> = 미개척 기회(단 확정 부재는 아님. 브랜드에 기존 거래·영역충돌 서면 확인 필요).</li>
+    </ul>
+
+    <h3 class="block">리테일 판매가(USD, 2026-10-05 자사몰 표시가)</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th>품목</th><th class="num">가격대(USD)</th><th>대표 상품</th></tr></thead>
+        <tbody>
+          <tr><td>크롭탑·탑</td><td class="num">50~85</td><td>Crop Top Modal, St Moritz silk chiffon</td></tr>
+          <tr><td>티셔츠</td><td class="num">55~105</td><td>남성 Supima, Modal V-Neck</td></tr>
+          <tr><td>쇼츠</td><td class="num">60~85</td><td>Yoga silk modal</td></tr>
+          <tr><td>셔츠</td><td class="num">95~160</td><td>lyocell, silk-Tencel, bubble silk</td></tr>
+          <tr><td>팬츠</td><td class="num">85~145</td><td>cotton·viscose satin·brocade</td></tr>
+          <tr><td>드레스</td><td class="num">130~220</td><td>Rib Silk 130, Tiram·Mary Jane 220</td></tr>
+          <tr><td>기모노</td><td class="num">105~235</td><td>lyocell 105 … velvet 235</td></tr>
+          <tr><td>스커트</td><td class="num">175</td><td>Gipsy Crepe·Brocade</td></tr>
+          <tr><td>스킨푸드</td><td class="num">26~29</td><td>butter·serum·mask·scrub</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="block">도매가·원가(공개 없음 → 벤치마크·역산 추정)</h3>
+    <div class="cols2">
+      <div class="card">
+        <h4 style="margin-top:0">도매율</h4>
+        <ul class="clean">
+          <li>패션 keystone: 소매가의 50% 매입이 출발점(리테일러 총마진 약 50%).</li>
+          <li>통관·재고·마케팅까지 하는 한국 <strong>디스트리뷰터</strong>는 50%로는 얇다.</li>
+          <li>바이인 목표 <strong>MSRP의 25~35%</strong>로 역산 협상(추정, Muka 공개정책 아님).</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4 style="margin-top:0">제조원가(FOB) 벤치마크</h4>
+        <ul class="clean">
+          <li>발리 봉제 레이온 카프탄 $8~18/장.</li>
+          <li>코튼·리넨 복잡 드레스 $15~35/장.</li>
+          <li>리테일 $220 드레스의 제조원가는 수제·소량·천연 프리미엄 감안해도 리테일의 15~30% 안쪽일 개연. <strong>Muka 실제 원가는 확인불가</strong>(협상 핵심).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="warnbox"><b>생산량·납기(확인불가 → 1순위 질문).</b> Muka 월 생산량·공장·봉제인원·made-to-order 여부는 확인불가다. 다수 색상·사이즈가 품절이고 현지 리뷰도 "금방 품절"이라 <b>소량생산 정황</b>이 있다(수제 확정 증거는 아님). 업계 벤치마크로 small batch 50~200pcs end-to-end 8~10주 → <b>8~12주 납기 가정</b>으로 견적을 받고, "스타일당·컬러당 MOQ"와 "총액 MOQ"를 각각 물어야 한다. 이 소량 구조가 <b>리오더·납기 리스크라는 이번 사업 최대 변수</b>다.</div>
+  </div>
+</section>
+
+<!-- D. CUSTOMS -->
+<section id="customs">
+  <div class="wrap">
+    <div class="eyebrow">D</div>
+    <h2 class="sect">한국 수입: 통관 · 세금 · 규제</h2>
+    <p class="sect-sub">신뢰도: 제도 <span class="badge b-ok">높음</span> · 품목별 세율·실제 견적은 <span class="badge b-warn">확정 필요</span>. 아래는 거래 전 실사 자료이지 법률·세무 자문이 아니다.</p>
+
+    <h3 class="block">관세 · FTA (의류, 인도네시아 → 한국)</h3>
+    <ul class="clean">
+      <li>HS: 비편물 62류 / 편물 61류. 품명만으로 HS가 정해지지 않는다. 용도·구조·성별·소재·혼용률로 10단위를 확정해야 한다.</li>
+      <li>MFN 기본세율은 다수 의류가 <strong>13%</strong>(전품목 일괄은 아님).</li>
+    </ul>
+    <div class="tw">
+      <table>
+        <thead><tr><th>협정</th><th>핵심</th><th>비고</th></tr></thead>
+        <tbody>
+          <tr><td><strong>IK-CEPA</strong><br>(한-인니 CEPA)</td><td>2023-01-01 발효. 섬유·의류 원산지기준을 한-아세안 FTA보다 단순·기업친화화, 일부 의류 추가 철폐</td><td>인니 통상부 발급, 유효 1년, <strong>FOB USD 200 이하 C/O 제출 면제</strong></td></tr>
+          <tr><td>한-아세안 FTA</td><td>Form AK, 다수 의류 특혜 가능</td><td>2026-05-01 HS 기준연도 변경 → 품목별 기준 개정, 최신 확인</td></tr>
+          <tr><td>RCEP</td><td>한국·인니 모두 당사국</td><td>"=0%"가 아님. 세번별 단계철폐 상이</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note"><b>핵심.</b> 3개 협정은 동일 상품에 중복 적용 불가 → 10단위 HS별로 최저세율·가장 쉬운 원산지기준을 비교한다. "발리 봉제"만으로 인니산이 자동 인정되지 않는다. 브랜드에서 <b>원사·원단 공급국 + weaving/knitting·dyeing·cutting·sewing 공정표 + C/O 발급 가능 여부</b>를 먼저 받아야 0%가 가능하다.</div>
+
+    <h3 class="block">부가세 · 소액통관</h3>
+    <ul class="clean">
+      <li>수입 VAT 10% = (CIF + 관세) × 10%. 일반 의류는 개별소비세 없음. 과세사업자면 매입세액 공제 가능(회계사 확인).</li>
+      <li>USD 150 목록통관·소액면세는 <strong>자가사용 직구</strong> 기준. 판매용 상업재고는 금액 무관 정식 수입신고 대상. 분할 반입 합산 배제 유의.</li>
+    </ul>
+
+    <h3 class="block">섬유 안전 · 한글 표시 (전안법)</h3>
+    <div class="okbox"><b>성인 의류 = 안전기준준수대상 가정용섬유제품.</b> 의무 제품시험 없음·KC마크 불부착. 다만 안전성 관리 + 한글 품질표시는 의무다.</div>
+    <ul class="clean">
+      <li>필수 표시(한글): 섬유 혼용률(겉·안감)·제조자 또는 수입자명·제조국·제조연월·치수·취급주의·수입자 주소·전화.</li>
+      <li>시험의무 없음이 유해물질 면책은 아니다. 짙은 염색·금속 부자재가 있으면 포름알데히드·아릴아민·pH·니켈 등 원단군별 시험 고려.</li>
+      <li><strong>아동용(36개월~만 13세)은 공급자적합성확인 대상(더 엄격).</strong> 초기 계약은 성인복만 명시 권고.</li>
+    </ul>
+
+    <h3 class="block">Landed cost 비용 항목 + 예시</h3>
+    <p>포함할 비용: 상품 FOB·발리 내륙운송·수출통관·국제운임(해상/항공)·적하보험·도착 THC/CFS·보관·국내배송·관세·수입 VAT·관세사 수수료·C/O 비용·원단·완제품 시험비·한글 라벨 제작·부착·불량검사·송금·환전 spread·반품·재고 금융.</p>
+    <div class="note"><b>운임 벤치마크(견적 아님).</b> Denpasar→Incheon 항공 약 USD 1.72/kg. Jakarta→Busan LCL ocean-only 약 USD 132/CBM·14~28일. 발리 픽업·feeder·local charge 별도 → 포워더 3곳 door-to-door 견적 필수. 관세사 신고수수료 건당 약 3만원대, 원산지 택 봉제 약 200원/개.</div>
+    <div class="tw">
+      <table>
+        <caption>예시(설명용 추정): 상품 FOB $5,000 + 국제운임·보험 $800 = CIF $5,800</caption>
+        <thead><tr><th>시나리오</th><th class="num">관세</th><th class="num">수입 VAT</th><th class="num">세금포함 원가(국내비용 전)</th></tr></thead>
+        <tbody>
+          <tr><td>기본관세 13% 가정</td><td class="num">$754</td><td class="num">$655.40</td><td class="num"><strong>$7,209.40</strong></td></tr>
+          <tr><td>FTA 0% 적용 가정</td><td class="num">$0</td><td class="num">$580.00</td><td class="num"><strong>$6,380.00</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>차이 <strong>$829.40</strong>가 이 사례에서 C/O·원산지관리의 직접 효과다. 단 0%는 HS와 원산지기준 충족을 확인한 뒤에만 쓸 수 있는 가정이다. 여기에 국내 항만비·관세사·시험·라벨·창고·last mile·결제·환전비를 더한다.</p>
+  </div>
+</section>
+
+<!-- E. DEAL -->
+<section id="deal">
+  <div class="wrap">
+    <div class="eyebrow">E</div>
+    <h2 class="sect">협상 구조 · 접근 전략 · 주의점</h2>
+    <p class="sect-sub">신뢰도: 제도·실무 <span class="badge b-ok">높음</span> · 수치(수수료·마진·파일럿)는 협상안·추정</p>
+
+    <h3 class="block">계약 형태 (권고: 파일럿 → 조건부 독점)</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th>구조</th><th>장점</th><th>단점·적합상황</th></tr></thead>
+        <tbody>
+          <tr><td>한국 독점 distributor</td><td>투자회수·가격/채널 통제, 브랜드 단일창구</td><td>최소구매·재고·마케팅 의무 큼. 직판·면세·호텔·온라인을 범위에 명확히 안 넣으면 분쟁</td></tr>
+          <tr><td>비독점 wholesale</td><td>첫 주문 작고 빠름, 검증에 적합</td><td>타 수입사·직판과 가격충돌</td></tr>
+          <tr><td>위탁(consignment)</td><td>초기 재고부담 낮음</td><td>소유권·멸실·반품·수출입자·관세부담 정리 필요</td></tr>
+          <tr><td>라이선스·현지생산</td><td>장기 운임·납기 개선</td><td>IP·품질·minimum royalty 복잡 → 2단계 이후</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="okbox"><b>권고 구조.</b> 90~180일 유상 비독점 파일럿 + 사전합의 KPI 달성 시 12개월 조건부 독점 전환. 무성과 독점 선불보다 브랜드에도 유리하다.</div>
+
+    <h3 class="block">독점계약 필수 협의항목</h3>
+    <ol class="steps">
+      <li><strong>당사자 실사:</strong> 인니 PT / 미국 LLC 중 누가 상품 공급·상표권을 보유하는지, 서명권자·beneficial owner 확인</li>
+      <li><strong>영역·채널:</strong> 한국 전역 + 온라인·마켓플레이스·호텔·면세·팝업 포함 여부, 브랜드 글로벌몰의 한국 배송 처리</li>
+      <li><strong>제품 범위:</strong> 의류만 시작 권고(규제 분리 쉬움). 신제품 자동 포함 여부</li>
+      <li><strong>기간·갱신:</strong> 파일럿 3~6개월, 독점 12개월, cure period·sell-off 3~6개월</li>
+      <li><strong>최소구매:</strong> 연 금액·수량, 스타일·컬러 MOQ, 공급지연 시 KPI 조정. 미달 시 즉시 해지보다 비독점 전환</li>
+      <li><strong>가격·마진:</strong> 라인시트·한국 MSRP·환율 band·price parity·Incoterms 비교(EXW·FOB·FCA)</li>
+      <li><strong>품질·납기:</strong> 승인샘플·혼용률·colorfastness/shrinkage/치수 tolerance·AQL·불량 credit·recall</li>
+      <li><strong>상표·IP:</strong> 한국 상표는 브랜드 명의 출원 + 기간한정 사용권. 도메인·SNS·번역물·고객DB 종료 후 귀속</li>
+      <li><strong>마케팅:</strong> 초기 콘텐츠 제공·co-op %·승인 SLA·한국어 소재 사용권</li>
+      <li><strong>해지·분쟁:</strong> 중대위반·반복 납기지연·상표분쟁·change of control. 잔여재고 buyback, 준거법·중재지·언어</li>
+    </ol>
+
+    <h3 class="block">핵심 리스크 &amp; 대응</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th>리스크</th><th>대응</th></tr></thead>
+        <tbody>
+          <tr><td><strong>① 한국 상표 선점</strong></td><td>KIPRIS에서 MUKA CONCEPTS·로고·한글음역을 3류(화장품)·25류(의류)·35류(소매/도매) 조사. <strong>미국 등록은 class 3 화장품뿐 → 한국 의류(25류) 무방비.</strong> 브랜드 명의 선제 출원 또는 출원·비용·회수권을 계약에 명문화. 한국 출원/등록 현황 자체는 이번 조사 확인불가 → 즉시 KIPRIS 확인</td></tr>
+          <tr><td>② 직판·중복 유통</td><td>"exclusive"만 쓰지 말고 자사몰 한국배송·마켓·travel retail·B2B lead·affiliate를 열거하고 위반 시 cure/credit/해지. 기존 한국 고객·계정 서면 disclosure</td></tr>
+          <tr><td>③ 생산능력·납기</td><td>파일럿 PO로 실제 lead time·fill rate·불량률 측정. capacity reservation·late-delivery cancellation·원단 대체 사전승인·시즌 deadline(월 capacity 확인불가)</td></tr>
+          <tr><td>④ 정품·품질</td><td>브랜드 발행 invoice·SKU/lot·approved sample·composition report·C/O·상표사용허락. 제조물책임·리콜·검사실패 비용 배분</td></tr>
+          <tr><td>⑤ 환율·결제</td><td>첫 1~2회 30~50% deposit + 선적서류·QC 확인 후 잔금. 100% T/T 선금은 수입자 리스크, L/C는 소액엔 비용과다. USD가 환율 band 명시</td></tr>
+          <tr><td>⑥ 가품·병행수입</td><td>한국 상표 + 세관 지재권 신고 검토. 단 적법 유통된 진정상품의 병행수입은 일정 요건서 가능 → 독점계약만으로 완전차단 불가(전문가 검토)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="block">"낮은 비용으로 한국 독점"을 끌어내는 설득법</h3>
+    <p>브랜드에 독점료 인하만 요구하지 말고, <strong>브랜드가 직접 떠안아야 할 한국 진입비·실행 리스크를 대신 지는 패키지</strong>로 제안한다.</p>
+    <ol class="steps">
+      <li><strong>검증 가능한 파일럿:</strong> 3개월, 2~4개 hero SKU, 색상·사이즈 제한, 선주문·팝업으로 sell-through 입증. 선불 독점료 대신 첫 PO + KPI</li>
+      <li><strong>원스톱 진입 대행:</strong> HS 사전검토·FTA C/O·한글 라벨·안전성 자료·통관·CS/반품·현지 결제를 한국측이 담당</li>
+      <li><strong>콘텐츠 현지화:</strong> 브랜드가 사진·영상·창업자 인터뷰 사용권 제공, 한국측이 번역·룩북·인플루언서 seeding·팝업 집행. 산출물·계정·DB 귀속 명시</li>
+      <li><strong>비용 낮은 조건부 독점:</strong> upfront fee $0 또는 최소화, 대신 (a) opening PO (b) 분기 minimum purchase (c) 최소 마케팅 (d) 실적 미달 시 자동 비독점</li>
+      <li><strong>마진 2-tier 제안:</strong> 한국 MSRP 100 기준 리테일러 45~50 확보 + 한국 distributor가 landed 이후 20~30 gross points 확보하려면 브랜드 출고가가 MSRP의 25~35까지, DTC 단독이면 40~50(역산 추정). 단일 도매율 대신 DTC/retail 2가격대 + 연 volume rebate 제안</li>
+    </ol>
+    <div class="note"><b>첫 제안 핵심 메시지.</b> <i>"We are not asking you to finance Korea. We will pre-order a focused capsule, handle customs/compliance/local returns, and fund market validation. Exclusivity activates only after agreed sell-through and purchase targets."</i></div>
+
+    <h3 class="block">협상 전 브랜드에 요청할 자료 체크리스트</h3>
+    <div class="card fill">
+      <ul class="clean">
+        <li>법인증서(인니 PT·미국 LLC)·서명권자·계좌명의·beneficial owner</li>
+        <li>한국 포함 국가별 기존 distributor·stockist 영역충돌 declaration</li>
+        <li>wholesale 라인시트·MSRP·MOQ(총액·스타일·컬러)·샘플비·납기·payment/Incoterms</li>
+        <li>최근 12개월 SKU별 생산·판매량·월 최대 capacity·fill rate·불량/반품률</li>
+        <li>원단 혼용률·원산지·공정표·C/O(AK·IK-CEPA·RCEP) 발급경험</li>
+        <li>유해물질·색상견뢰도·수축률 시험서·care label·QC 기준</li>
+        <li>상표 등록목록(인니·미국·한국·마드리드)·로고·사진·영상 사용권</li>
+        <li>IG Insights 최근 90일·한국 팔로워/주문 비중</li>
+        <li>제품책임보험·recall 절차·불량/지연 credit 정책</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- UNKNOWN + NEXT -->
+<section id="unknown">
+  <div class="wrap">
+    <div class="eyebrow">확인불가 · 다음 액션</div>
+    <h2 class="sect">지어내지 않은 것 &amp; 다음 한 수</h2>
+
+    <h3 class="block">확인불가 항목(공개자료에 없어 비워둔 것)</h3>
+    <div class="warnbox">
+      <ul class="clean" style="margin:0">
+        <li>IG 최신 팔로워·한국 비중, 전체 연매출·감사재무·정확 직원수</li>
+        <li>창업자 법적 성명(Iris↔Irina 동일인 확정)·정확 국적·현 CEO 직함·공동창업자·지분</li>
+        <li>전품목 수공예·천연염색 여부, 섬유 혼용률·원단 원산지, 제3자 지속가능 인증</li>
+        <li>한국 공식 유통 "전혀 없음"의 확정(미발견 ≠ 부재 확정)</li>
+        <li>공개 도매가·MOQ·월 capacity·made-to-order 여부·실제 납기</li>
+        <li>제품별 10단위 HS·2026 최종 FTA 세율·원산지 충족 여부</li>
+        <li>실제 door-to-door 운임·관세사·시험·라벨 단가</li>
+        <li>한국 내 MUKA CONCEPTS 상표 출원·등록 현황 → KIPRIS 즉시 확인 필요</li>
+      </ul>
+    </div>
+
+    <h3 class="block">다음 액션</h3>
+    <ol class="steps">
+      <li><strong>상표 먼저:</strong> KIPRIS 3·25·35류 선점 여부 확인. 선점돼 있으면 전략이 통째로 바뀐다</li>
+      <li><strong>콜드 아웃리치:</strong> 이메일·IG DM으로 요청자료 체크리스트 + 파일럿 제안(브랜드 세계관 존중 톤)</li>
+      <li><strong>받은 자료로 2차 산정:</strong> 실제 FOB·MOQ·capacity로 landed cost·마진·손익분기 모델 확정</li>
+      <li><strong>파일럿 설계:</strong> hero SKU 2~4개·KPI(sell-through·납기·불량률)·조건부 독점 트리거 문서화</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <h3>방법론 &amp; 주요 출처</h3>
+    <p>2레인 교차검증: <strong>codex</strong>(웹검색, 법인·정부자료 중심) + <strong>Claude</strong>(웹검색, 매체·실무 보강). 고위험 사실은 양 레인 합치 여부를 표기하고, 확인 못 한 것은 확인불가로 남겼다. 동명이물 "MUKA &amp; CO"(Nabilah Mohammad Isa, 메이크업+테크)는 다른 회사로 조사에서 제외했다.</p>
+    <ol>
+      <li>Muka Concepts 공식몰 · Contact · 전체상품: mukaconcepts.com, /pages/contact, /collections/all</li>
+      <li>SpaChina(2021) 창업자·브랜드 기사(PDF): 6degreesspa.com/wp-content/uploads/2023/12/MUKA-Concepts-May_June.pdf</li>
+      <li>The Yak Magazine "Herbology in Bali at Muka Concepts": theyakmag.com/herbology-in-bali/</li>
+      <li>인도네시아 BPOM 2025 수입업자·BUPN 목록(PDF): waskos.pom.go.id</li>
+      <li>미국 Florida 법인 추출자료: bizprofile.net/fl/miami/muka-concepts-llc</li>
+      <li>미국 상표(class 3): uspto.report/TM/90295709, trademarkia.com/muka-concepts-90295709</li>
+      <li>거점·리뷰: corner.inc, fresha.com, ohanaretreatbali.com/shopping</li>
+      <li>커머스 인덱스: xpay.sh/agentic-commerce-ready-index/mukaconcepts.com</li>
+      <li>관세청 FTA포털·IK-CEPA 가이드북(2024): customs.go.kr/ftaportalkor, KOTRA dream.kotra.or.kr</li>
+      <li>RCEP 인도네시아 양허표(FTA포털): fta.go.kr</li>
+      <li>전안법·공급자적합성확인(KATS): kats.go.kr/content.do?cmsid=553</li>
+      <li>국제 유통계약 가이드: Baker McKenzie International Agency &amp; Distribution Handbook(2018)</li>
+      <li>무역결제(T/T·L/C): U.S. ITA Trade Finance Guide, trade.gov</li>
+      <li>운임 벤치마크: flexport.com(Denpasar→Incheon air), indoexpress.co.id(Jakarta→Busan LCL)</li>
+      <li>도매·MOQ·리드타임 벤치마크: shopify.com(keystone), seller.alibaba.com(2026 apparel MOQ/lead-time)</li>
+    </ol>
+    <p class="disc">본 리포트는 2026-10-05 기준 공개 소스 조사이며 법률·세무·관세 자문이 아니다. 관세율·FTA 적용·안전규제·계약조건은 발주·계약 전 관세사·변호사·회계사와 브랜드 실사로 반드시 재확인해야 한다. 비공개 수치(도매가·생산량 등)는 추정·벤치마크로 표기했고, 확정값이 아니다. · NoFail Design 리서치</p>
+  </div>
+</footer>
+
+</body>
+</html>
