@@ -133,6 +133,7 @@
       <a href="#dist">C. 유통·가격·원가<span>리테일가·도매·생산량</span></a>
       <a href="#customs">D. 통관·세금·규제<span>IK-CEPA·전안법·landed cost</span></a>
       <a href="#deal">E. 협상·전략·리스크<span>계약형태·상표·설득법</span></a>
+      <a href="#pnl">F. 제품별 손익<span>수입가 30% 공헌이익 모델</span></a>
       <a href="#unknown">확인불가 · 다음 액션<span>지어내지 않은 것</span></a>
       <a href="#glossary">용어 사전<span>무역·유통·계약 전문용어</span></a>
     </nav>
@@ -465,6 +466,68 @@
         <li>제품책임보험·recall 절차·불량/지연 credit 정책</li>
       </ul>
     </div>
+  </div>
+</section>
+
+<!-- F. P&L -->
+<section id="pnl">
+  <div class="wrap">
+    <div class="eyebrow">F</div>
+    <h2 class="sect">제품별 손익 시뮬레이션 (수입가 = 판매가 30%)</h2>
+    <p class="sect-sub">리포트에서 확인된 리테일 판매가를 원화로 잡고, 수입가를 판매가의 30%로 가정해 제품별 매출·비용·이익을 계산했다. <strong>제품 1벌 단위의 공헌이익(기여이익)</strong>이며, 마케팅·인건비 등 고정비는 뺀 값이다(아래 주석 필독).</p>
+
+    <div class="card fill">
+      <h4 style="margin-top:0">계산 가정 (전부 조정 가능)</h4>
+      <ul class="clean">
+        <li><strong>판매가:</strong> Muka 자사몰 리테일가를 1 USD ≈ 1,340원으로 환산(100원 단위 반올림). 한국 판매가를 이 수준으로 책정한다고 가정.</li>
+        <li><strong>수입가 = 판매가 × 30%</strong>(요청 기준. 아직 브랜드와 미협상. 앞선 조사의 바이인 목표 25~35% 범위 안).</li>
+        <li><strong>관세 13%</strong>(기본세율 가정, 과세표준은 수입가). <strong>IK-CEPA 원산지증명(C/O) 적용 시 0%</strong> → 관세와 그에 붙는 수입부가세가 사라져 이익이 늘어난다(제품별 +수천~1.3만원대).</li>
+        <li><strong>통관료</strong>(관세사) 건당 33,000원을 <strong>1회 100벌 수입 가정</strong>으로 분배 → 330원/벌.</li>
+        <li><strong>기타 수수료·비용</strong> = 수입가의 3%(환전·송금·원산지증명·검사 등 수입 관련 분배 가정).</li>
+        <li><strong>운송료</strong> 2,500원/벌, <strong>보관료</strong> 500원/벌(발리→한국 + 3PL, 100벌/회 분배 가정).</li>
+        <li><strong>고객 배송비 2,500원</strong>, <strong>포장비 2,500원</strong>(요청 고정값).</li>
+        <li><strong>수입 부가세</strong> = (수입가 + 관세 + 운송료) × 10%.</li>
+      </ul>
+    </div>
+
+    <div class="tw">
+      <table>
+        <caption>단위: 원(KRW) · 제품 1벌 기준 · 원화는 1 USD≈1,340원 환산 근사치(2026-10-05) · 모든 분배비는 추정</caption>
+        <thead>
+          <tr><th>항목</th><th class="num">크롭탑</th><th class="num">티셔츠</th><th class="num">팬츠</th><th class="num">셔츠</th><th class="num">기모노</th><th class="num">드레스</th><th class="num">벨벳기모노</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>판매가 (매출)</strong></td><td class="num"><strong>67,000</strong></td><td class="num"><strong>113,900</strong></td><td class="num"><strong>140,700</strong></td><td class="num"><strong>174,200</strong></td><td class="num"><strong>214,400</strong></td><td class="num"><strong>294,800</strong></td><td class="num"><strong>314,900</strong></td></tr>
+          <tr><td>(−) 수입가 (30%)</td><td class="num">20,100</td><td class="num">34,170</td><td class="num">42,210</td><td class="num">52,260</td><td class="num">64,320</td><td class="num">88,440</td><td class="num">94,470</td></tr>
+          <tr><td>(−) 관세 (13%)</td><td class="num">2,613</td><td class="num">4,442</td><td class="num">5,487</td><td class="num">6,794</td><td class="num">8,362</td><td class="num">11,497</td><td class="num">12,281</td></tr>
+          <tr><td>(−) 통관료</td><td class="num">330</td><td class="num">330</td><td class="num">330</td><td class="num">330</td><td class="num">330</td><td class="num">330</td><td class="num">330</td></tr>
+          <tr><td>(−) 기타 수수료·비용 (3%)</td><td class="num">603</td><td class="num">1,025</td><td class="num">1,266</td><td class="num">1,568</td><td class="num">1,930</td><td class="num">2,653</td><td class="num">2,834</td></tr>
+          <tr><td>(−) 운송료</td><td class="num">2,500</td><td class="num">2,500</td><td class="num">2,500</td><td class="num">2,500</td><td class="num">2,500</td><td class="num">2,500</td><td class="num">2,500</td></tr>
+          <tr><td>(−) 보관료</td><td class="num">500</td><td class="num">500</td><td class="num">500</td><td class="num">500</td><td class="num">500</td><td class="num">500</td><td class="num">500</td></tr>
+          <tr><td>(−) 고객 배송비</td><td class="num">2,500</td><td class="num">2,500</td><td class="num">2,500</td><td class="num">2,500</td><td class="num">2,500</td><td class="num">2,500</td><td class="num">2,500</td></tr>
+          <tr><td>(−) 포장비</td><td class="num">2,500</td><td class="num">2,500</td><td class="num">2,500</td><td class="num">2,500</td><td class="num">2,500</td><td class="num">2,500</td><td class="num">2,500</td></tr>
+          <tr><td>(−) 부가세 (수입)</td><td class="num">2,521</td><td class="num">4,111</td><td class="num">5,020</td><td class="num">6,155</td><td class="num">7,518</td><td class="num">10,244</td><td class="num">10,925</td></tr>
+          <tr style="background:var(--fill-2)"><td><strong>총비용</strong></td><td class="num"><strong>34,167</strong></td><td class="num"><strong>52,078</strong></td><td class="num"><strong>62,313</strong></td><td class="num"><strong>75,107</strong></td><td class="num"><strong>90,460</strong></td><td class="num"><strong>121,164</strong></td><td class="num"><strong>128,840</strong></td></tr>
+          <tr style="background:var(--ok-bg)"><td><strong>공헌이익</strong></td><td class="num"><strong>32,833</strong></td><td class="num"><strong>61,822</strong></td><td class="num"><strong>78,387</strong></td><td class="num"><strong>99,093</strong></td><td class="num"><strong>123,940</strong></td><td class="num"><strong>173,636</strong></td><td class="num"><strong>186,060</strong></td></tr>
+          <tr style="background:var(--ok-bg)"><td><strong>이익률</strong></td><td class="num"><strong>49.0%</strong></td><td class="num"><strong>54.3%</strong></td><td class="num"><strong>55.7%</strong></td><td class="num"><strong>56.9%</strong></td><td class="num"><strong>57.8%</strong></td><td class="num"><strong>58.9%</strong></td><td class="num"><strong>59.1%</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note"><b>읽는 법.</b> 저가 품목일수록 이익률이 낮다(크롭탑 49% vs 벨벳기모노 59%). 배송비·포장비 같은 <b>벌당 고정비(5,000원)</b>가 싼 상품에서 비중이 크기 때문이다. 즉 객단가가 높을수록 1벌당 이익과 이익률이 모두 유리하다.</div>
+
+    <div class="warnbox"><b>이 표는 "제품 단위 공헌이익"이다. 순이익이 아니다.</b> 다음 비용은 <b>빠져 있으므로</b> 실제 영업이익은 이보다 낮다:
+      <ul class="clean" style="margin:8px 0 0">
+        <li><b>판매 수수료:</b> 카드·PG·오픈마켓 수수료(매출의 약 2~3%+), 플랫폼 입점 수수료</li>
+        <li><b>마케팅·광고비</b>(이 사업의 최대 변수), 인건비·사무실·CS</li>
+        <li><b>반품·교환·재고 손실</b>(의류는 반품률 높음), 시즌 재고 할인</li>
+        <li><b>초기·고정 투자:</b> 한국 상표 출원, 전안법 시험·라벨 제작, 샘플비, 법률·회계 자문</li>
+      </ul>
+    </div>
+
+    <div class="okbox"><b>FTA 0% 적용 시 이익 증가.</b> IK-CEPA 원산지증명을 받아 관세가 0%가 되면, 관세 전액 + 그에 붙던 수입부가세(관세의 10%)가 사라진다. 예: 벨벳기모노는 관세 12,281 + 부가세분 1,228 ≈ <b>+13,509원</b>, 드레스는 약 +12,647원, 크롭탑은 약 +2,874원 이익이 늘어난다. <b>원산지증명 확보가 이익에 직접 꽂히는 레버다.</b></div>
+
+    <div class="note"><b>부가세 주의.</b> 표의 "수입 부가세"는 과세사업자라면 <b>매입세액으로 공제·환급</b>되어 실질 비용이 아닐 수 있다(이 경우 이익은 더 높아짐). 반대로 소비자가에 포함된 <b>매출 부가세(판매가의 약 1/11)</b>는 납부 대상이다. 정확한 순부가세 = 매출세액 − 매입세액이므로, 최종 수치는 회계사와 확정해야 한다. 본 표는 요청대로 수입 부가세를 비용 행에 표기한 것이다.</div>
   </div>
 </section>
 
